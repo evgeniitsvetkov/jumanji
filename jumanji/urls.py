@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from vacancies.views import MainView, VacanciesView, VacanciesByCategoryView, VacancyView, CompanyView
+
 urlpatterns = [
+    path('', MainView.as_view()),
+    path('vacancies/', VacanciesView.as_view()),
+    path('vacancies/cat/<str:category>/', VacanciesByCategoryView.as_view()),
+    path('vacancies/<int:vacancy_id>/', VacancyView.as_view()),
+    path('companies/<int:company_id>/', CompanyView.as_view()),
     path('admin/', admin.site.urls),
 ]
