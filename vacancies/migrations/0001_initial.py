@@ -42,8 +42,10 @@ class Migration(migrations.Migration):
                 ('salary_min', models.IntegerField()),
                 ('salary_max', models.IntegerField()),
                 ('published_at', models.DateTimeField()),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='vacancies', to='vacancies.Company')),
-                ('speciality', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='vacancies', to='vacancies.Speciality')),
+                ('company', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
+                                              related_name='vacancies', to='vacancies.Company')),
+                ('speciality', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
+                                                 related_name='vacancies', to='vacancies.Speciality')),
             ],
         ),
     ]
