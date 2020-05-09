@@ -25,4 +25,3 @@ class VacancyView(View):
 class CompanyView(View):
     def get(self, request, company_id):
         return render(request, 'vacancies/company.html')
-
