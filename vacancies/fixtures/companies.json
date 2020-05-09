@@ -1,0 +1,9 @@
+[
+  {
+    "model": "vacancies.company",
+    "pk": 1,
+    "fields": {
+      "name": "workiro"
+    }
+  }
+]
