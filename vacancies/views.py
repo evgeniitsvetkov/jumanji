@@ -37,7 +37,14 @@ class VacanciesByCategoryView(View):
 
 class VacancyView(View):
     def get(self, request, vacancy_id):
-        return render(request, 'vacancies/vacancy.html')
+        try:
+            vacancy = Vacancy.objects.get(id=vacancy_id)
+        except Vacancy.DoesNotExist:
+            return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
+
+        return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy,
+                                                          'specialty': vacancy.speciality,
+                                                          'company': vacancy.company})
 
 
 class CompanyView(View):
