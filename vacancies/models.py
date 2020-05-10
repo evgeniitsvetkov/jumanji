@@ -10,7 +10,7 @@ class Company(models.Model):
 
 
 class Speciality(models.Model):
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=20)
     picture = models.CharField(max_length=200)
 

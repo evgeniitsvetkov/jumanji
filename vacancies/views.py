@@ -1,7 +1,8 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.views import View
 
-from vacancies.models import Company, Speciality
+from vacancies.models import Company, Speciality, Vacancy
 
 
 class MainView(View):
@@ -15,12 +16,23 @@ class MainView(View):
 
 class VacanciesView(View):
     def get(self, request):
-        return render(request, 'vacancies/vacancies.html')
+        vacancies = Vacancy.objects.all()
+
+        return render(request, 'vacancies/vacancies.html', {'vacancies': vacancies,
+                                                            'page_title': 'Все вакансии'})
 
 
 class VacanciesByCategoryView(View):
     def get(self, request, category):
-        return render(request, 'vacancies/vacancies.html')
+        try:
+            category = Speciality.objects.get(code=category)
+        except Speciality.DoesNotExist:
+            return HttpResponseNotFound('Вы запрашиваете несуществующую специализацию')
+        else:
+            vacancies_by_category = Vacancy.objects.filter(speciality=category)
+
+        return render(request, 'vacancies/vacancies.html', {'vacancies': vacancies_by_category,
+                                                            'page_title': category.title})
 
 
 class VacancyView(View):
