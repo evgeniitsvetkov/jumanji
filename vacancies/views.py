@@ -42,4 +42,12 @@ class VacancyView(View):
 
 class CompanyView(View):
     def get(self, request, company_id):
-        return render(request, 'vacancies/company.html')
+        try:
+            company = Company.objects.get(id=company_id)
+        except Company.DoesNotExist:
+            return HttpResponseNotFound('Вы запрашиваете несуществующую компанию')
+        else:
+            vacancies_by_company = Vacancy.objects.filter(company=company)
+
+        return render(request, 'vacancies/company.html', {'company': company,
+                                                          'vacancies': vacancies_by_company})
