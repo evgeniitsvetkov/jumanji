@@ -1,9 +1,1 @@
-[
-  {
-    "model": "vacancies.company",
-    "pk": 1,
-    "fields": {
-      "name": "workiro"
-    }
-  }
-]
+[{"model": "vacancies.company", "pk": 1, "fields": {"name": "workiro", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo1.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 2, "fields": {"name": "rebelrage", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo2.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 3, "fields": {"name": "staffingsmarter", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo3.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 4, "fields": {"name": "evilthreat\u2028h", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo4.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 5, "fields": {"name": "hirey\u2028", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo5.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 6, "fields": {"name": "swiftattack", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo6.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 7, "fields": {"name": "troller", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo7.png", "description": "", "employee_count": 10}}, {"model": "vacancies.company", "pk": 8, "fields": {"name": "primalassault", "location": "\u0420\u044f\u0437\u0430\u043d\u044c", "logo": "vacancies/companies/logo8.png", "description": "", "employee_count": 10}}]
