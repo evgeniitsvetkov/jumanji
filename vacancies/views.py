@@ -42,9 +42,7 @@ class VacancyView(View):
         except Vacancy.DoesNotExist:
             return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
 
-        return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy,
-                                                          'specialty': vacancy.speciality,
-                                                          'company': vacancy.company})
+        return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy})
 
 
 class CompanyView(View):
