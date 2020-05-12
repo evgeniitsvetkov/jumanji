@@ -37,7 +37,12 @@
               <img class="mx-auto d-block" src="{% static specialty.picture %}" width="80" height="80" alt="">
               <div class="card-body">
                 <p class="card-text mb-2">{{ specialty.title }}</p>
-                <p class="card-text"><a href="/vacancies/cat/{{ specialty.code }}">{{ specialty.vacancies.count }} вакансий</a></p>
+                {% load pymorphy_tags %}
+                {% if specialty.vacancies.count > 0 %}
+                  <p class="card-text"><a href="/vacancies/cat/{{ specialty.code }}">{{ specialty.vacancies.count }} {{ "вакансия"|plural:specialty.vacancies.count }}</a></p>
+                {% else %}
+                  <p class="card-text">сейчас вакансий нет</p>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -57,7 +62,11 @@
                 <img class="mx-auto d-block mw-100" src="{% static company.logo %}" alt="">
               </a>
               <div class="card-body">
-                <p class="card-text"><a href="/companies/{{ company.id }}">{{ company.vacancies.count }} вакансий</a></p>
+                {% if company.vacancies.count > 0 %}
+                  <p class="card-text"><a href="/companies/{{ company.id }}">{{ company.vacancies.count }} {{ "вакансия"|plural:company.vacancies.count }}</a></p>
+                {% else %}
+                  <p class="card-text">сейчас вакансий нет</p>
+                {% endif %}
               </div>
             </div>
           </div>
