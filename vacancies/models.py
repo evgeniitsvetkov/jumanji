@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -7,6 +8,7 @@ class Company(models.Model):
     logo = models.CharField(max_length=200)
     description = models.TextField()
     employee_count = models.IntegerField(default=10)
+    user = models.OneToOneField(User, related_name="company", on_delete=models.CASCADE, default=None, null=True)
 
 
 class Speciality(models.Model):
@@ -24,3 +26,11 @@ class Vacancy(models.Model):
     salary_min = models.IntegerField()
     salary_max = models.IntegerField()
     published_at = models.DateTimeField()
+
+
+class Application(models.Model):
+    written_username = models.CharField(max_length=50)
+    written_phone = models.CharField(max_length=20)
+    written_cover_letter = models.TextField()
+    vacancy = models.ForeignKey(Vacancy, related_name="applications", on_delete=models.PROTECT)
+    user = models.ForeignKey(User, related_name="applications", on_delete=models.PROTECT)
