@@ -28,10 +28,8 @@ class VacanciesByCategoryView(View):
             category = Speciality.objects.get(code=category)
         except Speciality.DoesNotExist:
             return HttpResponseNotFound('Вы запрашиваете несуществующую специализацию')
-        else:
-            vacancies_by_category = Vacancy.objects.filter(speciality=category)
 
-        return render(request, 'vacancies/vacancies.html', {'vacancies': vacancies_by_category,
+        return render(request, 'vacancies/vacancies.html', {'vacancies': category.vacancies.all(),
                                                             'page_title': category.title})
 
 
@@ -51,8 +49,6 @@ class CompanyView(View):
             company = Company.objects.get(id=company_id)
         except Company.DoesNotExist:
             return HttpResponseNotFound('Вы запрашиваете несуществующую компанию')
-        else:
-            vacancies_by_company = Vacancy.objects.filter(company=company)
 
         return render(request, 'vacancies/company.html', {'company': company,
-                                                          'vacancies': vacancies_by_company})
+                                                          'vacancies': company.vacancies.all()})

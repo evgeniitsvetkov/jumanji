@@ -30,14 +30,14 @@
       <h2 class="h2 font-weight-normal text-center mb-5">Вакансии по рубрикам</h2>
       <div class="row mb-0">
 
+        {% load static %}
+        {% load pymorphy_tags %}
         {% for specialty in specialties %}
           <div class="col-6 col-md-6 col-lg-3">
             <div class="card pt-4 text-center mb-4">
-              {% load static %}
               <img class="mx-auto d-block" src="{% static specialty.picture %}" width="80" height="80" alt="">
               <div class="card-body">
                 <p class="card-text mb-2">{{ specialty.title }}</p>
-                {% load pymorphy_tags %}
                 {% if specialty.vacancies.count > 0 %}
                   <p class="card-text"><a href="/vacancies/cat/{{ specialty.code }}">{{ specialty.vacancies.count }} {{ "вакансия"|plural:specialty.vacancies.count }}</a></p>
                 {% else %}
