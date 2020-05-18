@@ -1,8 +1,10 @@
 from django.db.models import Count
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import View
 
+from vacancies.forms import VacancyForm, ApplicationForm
 from vacancies.models import Company, Speciality, Vacancy
 
 
@@ -41,7 +43,22 @@ class VacancyView(View):
         except Vacancy.DoesNotExist:
             return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
 
-        return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy})
+        form = ApplicationForm()
+
+        return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy,
+                                                          'form': form})
+
+    def post(self, request, vacancy_id):
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+
+            return HttpResponseRedirect(reverse('application_sent'))
+
+
+class ApplicationSentView(View):
+    def get(self, request):
+
+        return render(request, 'vacancies/sent.html')
 
 
 class CompanyView(View):

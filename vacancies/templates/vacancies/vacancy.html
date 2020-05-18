@@ -15,10 +15,13 @@
           <div style="line-height: 1.8;">
             <p>{{ vacancy.description }}</p>
           </div>
-          <form action="/echo" class="card mt-4 mb-3">
+
+          <form action="" class="card mt-4 mb-3" method="POST">
+            {% csrf_token %}
             <div class="card-body mx-3">
               <p class="h5 mt-3 font-weight-normal">Отозваться на вакансию</p>
-              <div class="form-group">
+              {{ form.as_p }}
+              {% comment %}<div class="form-group">
                 <label class="mb-1 mt-2" for="userName">Вас зовут</label>
                 <input class="form-control" type="text" placeholder="" id="userName">
               </div>
@@ -29,10 +32,11 @@
               <div class="form-group">
                 <label class="mb-1" for="userMsg" >Сопроводительное письмо</label>
                 <textarea class="form-control" rows="8" id="userMsg"></textarea>
-              </div>
-              <input type="submit" class="btn btn-primary mt-4 mb-2" value="Записаться на пробный урок">
+              </div>{% endcomment %}
+              <input type="submit" class="btn btn-primary mt-4 mb-2" value="Отправить отклик">
             </div>
           </form>
+
         </section>
       </div>
 
