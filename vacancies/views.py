@@ -52,13 +52,13 @@ class VacancyView(View):
         form = ApplicationForm(request.POST)
         if form.is_valid():
 
-            return HttpResponseRedirect(reverse('application_sent'))
+            return HttpResponseRedirect(reverse('application_sent', kwargs={'vacancy_id': vacancy_id}))
 
 
 class ApplicationSentView(View):
-    def get(self, request):
+    def get(self, request, vacancy_id):
 
-        return render(request, 'vacancies/sent.html')
+        return render(request, 'vacancies/sent.html', {'vacancy_id': vacancy_id})
 
 
 class CompanyView(View):

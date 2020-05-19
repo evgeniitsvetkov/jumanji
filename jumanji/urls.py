@@ -24,7 +24,7 @@ urlpatterns = [
     path('vacancies/', VacanciesView.as_view()),
     path('vacancies/cat/<str:category>/', VacanciesByCategoryView.as_view()),
     path('vacancies/<int:vacancy_id>/', VacancyView.as_view()),
-    path('sent/', ApplicationSentView.as_view(), name='application_sent'),
+    path('vacancies/<int:vacancy_id>/sent/', ApplicationSentView.as_view(), name='application_sent'),
     path('companies/<int:company_id>/', CompanyView.as_view()),
     path('admin/', admin.site.urls),
 ]
