@@ -1,8 +1,10 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
+from django.views.generic import CreateView
 
 from vacancies.forms import VacancyForm, ApplicationForm
 from vacancies.models import Company, Speciality, Vacancy
@@ -70,3 +72,11 @@ class CompanyView(View):
 
         return render(request, 'vacancies/company.html', {'company': company,
                                                           'vacancies': company.vacancies.all()})
+
+
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    success_url = 'login'
+    template_name = 'vacancies/register.html'
+
+
