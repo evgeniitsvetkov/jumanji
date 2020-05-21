@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
 from django.db.models import Count
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
@@ -77,6 +78,12 @@ class CompanyView(View):
 class RegisterView(CreateView):
     form_class = UserCreationForm
     success_url = 'login'
-    template_name = 'vacancies/register.html'
+    template_name = 'auth/register.html'
+
+
+class MyLoginView(LoginView):
+    redirect_authenticated_user = True
+    template_name = 'auth/login.html'
+
 
 
