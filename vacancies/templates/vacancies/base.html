@@ -26,17 +26,19 @@
         </ul>
         <ul class="navbar-nav col-2 justify-content-end">
             {% if request.user.is_authenticated %}
-            <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ user }}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Профиль</a>
-                <a class="dropdown-item" href="#">Резюме</a>
-                <a class="dropdown-item" href="#">Компания</a>
-                <a class="dropdown-item" href="/logout/">Выйти</a>
-              </div>
-            </div>
+              <li class="nav-item active">
+                <div class="btn-group">
+                  <button type="button" class="btn dropdown-toggle font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user }}
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right mt-3">
+                    <a href="#" class="dropdown-item py-2">Профиль</a>
+                    <a href="#" class="dropdown-item py-2">Резюме</a>
+                    <a href="/mycompany/" class="dropdown-item py-2">Компания</a>
+                    <a href="/logout/" class="dropdown-item py-2">Выйти</a>
+                  </div>
+                </div>
+              </li>
             {% else %}
             <li class="nav-item active">
               <a href="/login/" class="nav-link font-weight-bold">Вход</a>

@@ -3,11 +3,11 @@ from django.db import models
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=100)
-    location = models.CharField(max_length=30)
+    name = models.CharField("Название комапнии", max_length=100)
+    location = models.CharField("География", max_length=30)
     logo = models.CharField(max_length=200)
-    description = models.TextField()
-    employee_count = models.IntegerField(default=10)
+    description = models.TextField("Информация о компании")
+    employee_count = models.IntegerField("Количество человек в компании", default=10)
     user = models.OneToOneField(User, related_name="company", on_delete=models.CASCADE, default=None, null=True)
 
 
