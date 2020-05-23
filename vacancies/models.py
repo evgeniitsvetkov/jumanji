@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class Company(models.Model):
@@ -18,14 +19,14 @@ class Speciality(models.Model):
 
 
 class Vacancy(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField("Название вакансии", max_length=50)
     speciality = models.ForeignKey(Speciality, related_name="vacancies", on_delete=models.PROTECT)
     company = models.ForeignKey(Company, related_name="vacancies", on_delete=models.PROTECT)
-    skills = models.TextField()
-    description = models.TextField()
-    salary_min = models.IntegerField()
-    salary_max = models.IntegerField()
-    published_at = models.DateTimeField()
+    skills = models.TextField("Требуемые навыки")
+    description = models.TextField("Описание вакансии")
+    salary_min = models.IntegerField("Зарплата от")
+    salary_max = models.IntegerField("Зарплата до")
+    published_at = models.DateTimeField(default=timezone.now)
 
 
 class Application(models.Model):

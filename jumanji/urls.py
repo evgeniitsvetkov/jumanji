@@ -17,18 +17,22 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from vacancies.views import MainView, VacanciesView, VacanciesByCategoryView, VacancyView, \
-    ApplicationSentView, CompanyView, RegisterView, MyLoginView, MyCompanyView, MyCompanyEditView
+from vacancies.views import MainView, VacanciesView, VacanciesByCategoryView, VacancyView, ApplicationSendView, \
+    CompanyView, MyCompanyView, MyCompanyEditView, MyCompanyVacanciesView, MyCompanyVacancyCreateView, \
+    MyCompanyVacancyEditView, RegisterView, MyLoginView
 
 urlpatterns = [
     path('', MainView.as_view()),
     path('vacancies/', VacanciesView.as_view()),
     path('vacancies/cat/<str:category>/', VacanciesByCategoryView.as_view()),
     path('vacancies/<int:vacancy_id>/', VacancyView.as_view()),
-    path('vacancies/<int:vacancy_id>/sent/', ApplicationSentView.as_view(), name='application_sent'),
+    path('vacancies/<int:vacancy_id>/sent/', ApplicationSendView.as_view(), name='application_sent'),
     path('companies/<int:company_id>/', CompanyView.as_view()),
     path('mycompany/', MyCompanyView.as_view()),
     path('mycompany/edit/', MyCompanyEditView.as_view()),
+    path('mycompany/vacancies/', MyCompanyVacanciesView.as_view()),
+    path('mycompany/vacancies/new/', MyCompanyVacancyCreateView.as_view()),
+    path('mycompany/vacancies/<int:vacancy_id>/', MyCompanyVacancyEditView.as_view()),
     path('admin/', admin.site.urls),
     path('register/', RegisterView.as_view()),
     path('login/', MyLoginView.as_view(), name="login"),
