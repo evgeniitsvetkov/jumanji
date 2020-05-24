@@ -1,4 +1,4 @@
-from django.contrib import messages
+# from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.db.models import Count
@@ -52,7 +52,7 @@ class VacancyView(View):
     def post(self, request, vacancy_id):
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect(reverse('application_sent', kwargs={'vacancy_id': vacancy_id}))
+            return HttpResponseRedirect(reverse('application_send', kwargs={'vacancy_id': vacancy_id}))
 
 
 class ApplicationSendView(View):

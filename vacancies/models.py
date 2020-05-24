@@ -30,8 +30,8 @@ class Vacancy(models.Model):
 
 
 class Application(models.Model):
-    written_username = models.CharField(max_length=50)
-    written_phone = models.CharField(max_length=20)
-    written_cover_letter = models.TextField()
+    written_username = models.CharField("Имя", max_length=50)
+    written_phone = models.CharField("Телефон для связи", max_length=20)
+    written_cover_letter = models.TextField("Сопроводительное письмо")
     vacancy = models.ForeignKey(Vacancy, related_name="applications", on_delete=models.PROTECT)
     user = models.ForeignKey(User, related_name="applications", on_delete=models.PROTECT)
