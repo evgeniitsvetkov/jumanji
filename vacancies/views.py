@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.db.models import Count
 from django.http import HttpResponseNotFound, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView
@@ -29,22 +29,14 @@ class VacanciesView(View):
 
 class VacanciesByCategoryView(View):
     def get(self, request, category):
-        try:
-            category = Speciality.objects.get(code=category)
-        except Speciality.DoesNotExist:
-            return HttpResponseNotFound('Вы запрашиваете несуществующую специализацию')
-
+        category = get_object_or_404(Speciality, code=category)
         return render(request, 'vacancies/vacancies.html', {'vacancies': category.vacancies.all(),
                                                             'page_title': category.title})
 
 
 class VacancyView(View):
     def get(self, request, vacancy_id):
-        try:
-            vacancy = Vacancy.objects.get(id=vacancy_id)
-        except Vacancy.DoesNotExist:
-            return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
-
+        vacancy = get_object_or_404(Vacancy, id=vacancy_id)
         form = ApplicationForm()
         return render(request, 'vacancies/vacancy.html', {'vacancy': vacancy,
                                                           'form': form})
@@ -62,11 +54,7 @@ class ApplicationSendView(View):
 
 class CompanyView(View):
     def get(self, request, company_id):
-        try:
-            company = Company.objects.get(id=company_id)
-        except Company.DoesNotExist:
-            return HttpResponseNotFound('Вы запрашиваете несуществующую компанию')
-
+        company = get_object_or_404(Company, id=company_id)
         return render(request, 'vacancies/company.html', {'company': company,
                                                           'vacancies': company.vacancies.all()})
 
@@ -166,10 +154,7 @@ class MyCompanyVacancyCreateView(View):
 class MyCompanyVacancyEditView(View):
     def get(self, request, vacancy_id):
         if request.user.is_authenticated:
-            try:
-                vacancy = Vacancy.objects.get(id=vacancy_id)
-            except Vacancy.DoesNotExist:
-                return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
+            vacancy = get_object_or_404(Vacancy, id=vacancy_id)
 
             # Если запрашиваемая вакансия принадлежит пользователю, подтягиваем данные о ней
             if request.user.company == vacancy.company:
@@ -189,10 +174,7 @@ class MyCompanyVacancyEditView(View):
 
     def post(self, request, vacancy_id):
         if request.user.is_authenticated:
-            try:
-                vacancy = Vacancy.objects.get(id=vacancy_id)
-            except Vacancy.DoesNotExist:
-                return HttpResponseNotFound('Вы запрашиваете несуществующую вакансию. Возможно она была удалена')
+            vacancy = get_object_or_404(Vacancy, id=vacancy_id)
 
             form = VacancyForm(request.POST)
             # Если запрашиваемая вакансия принадлежит пользователю, записываем данные о ней
@@ -215,10 +197,18 @@ class MyCompanyVacancyEditView(View):
 
 class RegisterView(CreateView):
     form_class = UserCreationForm
-    success_url = 'login'
+    success_url = '/login/'
     template_name = 'auth/register.html'
 
 
 class MyLoginView(LoginView):
     redirect_authenticated_user = True
     template_name = 'auth/login.html'
+
+
+def custom_handler404(request, exception):
+    return HttpResponseNotFound('Страница не найдена.')
+
+
+def custom_handler500(request, exception):
+    return HttpResponseNotFound('Сервер не отвечает. Попробуйте перезагрузить страницу.')

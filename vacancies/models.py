@@ -17,6 +17,9 @@ class Speciality(models.Model):
     title = models.CharField(max_length=20)
     picture = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.title
+
 
 class Vacancy(models.Model):
     title = models.CharField("Название вакансии", max_length=50)
